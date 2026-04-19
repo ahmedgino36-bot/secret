@@ -1,251 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Our Secret Love</title>
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-        color: white;
-        overflow-x: hidden;
-        min-height: 100vh;
-    }
-
-    .center {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        flex-direction: column;
-        text-align: center;
-        padding: 20px;
-    }
-
-    .box {
-        background: rgba(0,0,0,0.45);
-        padding: 25px;
-        border-radius: 20px;
-        box-shadow: 0 0 25px rgba(255,105,180,0.4);
-        backdrop-filter: blur(10px);
-        max-width: 900px;
-    }
-
-    input {
-        padding: 10px;
-        border-radius: 10px;
-        border: none;
-        outline: none;
-        margin-top: 10px;
-        width: 200px;
-    }
-
-    button {
-        margin-top: 10px;
-        padding: 10px 18px;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        background: hotpink;
-        color: white;
-        font-weight: bold;
-        transition: 0.3s;
-    }
-
-    button:hover { transform: scale(1.05); }
-
-    .hidden { display: none; }
-
-    h1 { color: #ff69b4; }
-
-    .heart {
-        position: absolute;
-        color: pink;
-        animation: float 6s linear infinite;
-    }
-
-    @keyframes float {
-        0% {transform: translateY(100vh) scale(0.5); opacity: 0;}
-        50% {opacity: 1;}
-        100% {transform: translateY(-10vh) scale(1.2); opacity: 0;}
-    }
-
-    .gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 10px;
-        margin-top: 20px;
-    }
-
-    .gallery img {
-        width: 100%;
-        height: 150px;
-        object-fit: cover;
-        border-radius: 15px;
-    }
-
-    .cards {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-top: 20px;
-        justify-content: center;
-    }
-
-    .card {
-        background: rgba(255,255,255,0.1);
-        padding: 15px;
-        border-radius: 15px;
-        width: 180px;
-    }
-
-    .message {
-        margin-top: 20px;
-        padding: 20px;
-        background: rgba(255,105,180,0.15);
-        border-radius: 15px;
-        display: none;
-    }
-
-    .counter {
-        margin-top: 15px;
-        font-size: 18px;
-        color: #ffd1f2;
-        font-weight: bold;
-        line-height: 1.8;
-    }
-
-    /* confetti */
-    .confetti {
-        position: fixed;
-        width: 8px;
-        height: 8px;
-        top: -10px;
-        animation: fall 3s linear forwards;
-        z-index: 9999;
-    }
-
-    @keyframes fall {
-        to {
-            transform: translateY(100vh) rotate(720deg);
-            opacity: 0;
-        }
-    }
+body{margin:0;font-family:Arial;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);color:#fff}
+.center{display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column}
+.box{background:rgba(0,0,0,.5);padding:25px;border-radius:20px;max-width:900px;text-align:center}
+.hidden{display:none}
+button{padding:10px 18px;border:none;border-radius:10px;background:hotpink;color:#fff;cursor:pointer}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.gallery img{width:100%;height:120px;border-radius:10px;object-fit:cover}
+.card{background:rgba(255,255,255,.1);padding:10px;border-radius:10px;cursor:pointer}
+.cards{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.message{background:rgba(255,105,180,.2);padding:15px;border-radius:10px;margin-top:10px}
+.poem-card{background:rgba(255,255,255,.1);padding:10px;border-radius:10px;margin:5px;cursor:pointer}
+.poems{display:flex;flex-wrap:wrap;justify-content:center}
 </style>
 </head>
 <body>
 
 <div class="center" id="login">
-    <div class="box">
-        <h2>Enter Password 💖</h2>
-        <input type="password" id="pass" placeholder="Password..." />
-        <br/>
-        <button onclick="check()">Unlock</button>
-    </div>
+<div class="box">
+<h2>Enter Password 💖</h2>
+<input id="pass" type="password"><br>
+<button onclick="check()">Unlock</button>
+</div>
 </div>
 
 <div class="center hidden" id="main">
-    <div class="box">
-        <h1>Welcome My Love 💕</h1>
+<div class="box">
+<h1>Welcome My Love 💕</h1>
 
-        <p>عدت أول سنة لينا مع بعض... وكل لحظة معاك كانت أجمل ❤️</p>
+<div id="counter"></div>
 
-        <div class="counter" id="counter"></div>
+<button onclick="showMessage()">اضغطي هنا 💌</button>
+<div class="message" id="msg" style="display:none">رسالة أول سنة ❤️</div>
 
-        <button onclick="showMessage()">اضغطي هنا 💌</button>
+<h3>📸 الجاليري</h3>
+<div class="gallery">
+<img src="image1.jpg"><img src="image2.jpg"><img src="image3.jpg"><img src="image4.jpg"><img src="image5.jpg"><img src="image6.jpg">
+</div>
 
-        <div class="message" id="msg">
-            <h3>رسالة أول سنة 💖</h3>
-            <p>
-                من أول يوم دخلتي فيه حياتي وأنا مش عارف أعيش من غيرك...
-                إنتِ مش مجرد حب، إنتِ الحياة كلها ❤️
-            </p>
-        </div>
+<h3>💳 الكروت</h3>
+<div class="cards">
+<div class="card" onclick="openCard('day')">أحلى يوم 🌹</div>
+<div class="card" onclick="openCard('talk')">أول كلام 💬</div>
+<div class="card" onclick="openCard('laugh')">أول ضحكة ❤️</div>
+</div>
+<div class="message" id="cardMsg"></div>
 
-        <h3>ذكرياتنا 📸</h3>
-        <div class="gallery">
-            <img src="image1.jpg" />
-            <img src="image2.jpg" />
-            <img src="image3.jpg" />
-            <img src="image4.jpg" />
-            <img src="image5.jpg" />
-            <img src="image6.jpg" />
-        </div>
+<h3>✨ مملكة الشعر</h3>
+<button onclick="randomPoem()">قصيدة جديدة 💖</button>
+<div class="poems">
+<div class="poem-card" onclick="showPoem(0)">قصيدة 1</div>
+<div class="poem-card" onclick="showPoem(1)">قصيدة 2</div>
+<div class="poem-card" onclick="showPoem(2)">قصيدة 3</div>
+</div>
+<div class="message" id="poemBox"></div>
 
-        <h3>كروت الحب 💳</h3>
-        <div class="cards">
-            <div class="card">أول مرة ضحكنا ❤️</div>
-            <div class="card">أول كلام بينا 💬</div>
-            <div class="card">أحلى يوم مع بعض 🌹</div>
-        </div>
+<audio id="music" loop>
+<source src="love.mp3" type="audio/mp3">
+</audio>
 
-        <audio id="music" loop>
-            <source src="love.mp3" type="audio/mp3" />
-        </audio>
-    </div>
+</div>
 </div>
 
 <script>
 function check(){
-    const p = document.getElementById('pass').value;
-    if(p === "love2026"){
-        document.getElementById('login').classList.add('hidden');
-        document.getElementById('main').classList.remove('hidden');
-        document.getElementById('music').play();
-        hearts();
-        counter();
-        celebration();
-        setInterval(counter, 1000);
-    } else {
-        alert("Wrong password 💔");
-    }
+if(document.getElementById('pass').value==='love2026'){
+login.classList.add('hidden');
+main.classList.remove('hidden');
+music.play();
+startCounter();
+setInterval(startCounter,1000);
+}
 }
 
-function showMessage(){
-    document.getElementById('msg').style.display = 'block';
+function showMessage(){msg.style.display='block';typeWriter(msg,'عدت سنة من أجمل سنين حياتي معاكي ❤️');}
+
+function openCard(t){
+let txt='';
+if(t==='day') txt='اليوم اللي عرفتك فيه غير حياتي ❤️';
+if(t==='talk') txt='8/7 كانت أول مكالمة بينا 💬';
+if(t==='laugh') txt='كل لحظة معاكي أحلى ❤️';
+cardMsg.innerText=txt;
 }
 
-function hearts(){
-    setInterval(()=>{
-        const h = document.createElement('div');
-        h.classList.add('heart');
-        h.innerHTML = '❤️';
-        h.style.left = Math.random()*100 + 'vw';
-        document.body.appendChild(h);
-        setTimeout(()=>h.remove(),6000);
-    },300);
+const poems=[
+'بحبك حب ملوش حدود ❤️',
+'يا أجمل حاجة في حياتي 💖',
+'معاكي الدنيا ليها طعم تاني 🌹'
+];
+
+function showPoem(i){
+    const text = poems[i];
+    typeWriter(poemBox,text);
+    speak(text);
+}
+function randomPoem(){
+    let i=Math.floor(Math.random()*poems.length);
+    showPoem(i);
 }
 
-function counter(){
-    const start = new Date("2025-04-08T00:00:00");
-    const now = new Date();
-    let diff = Math.floor((now - start)/1000);
-
-    let years = Math.floor(diff / (365*24*60*60)); diff %= (365*24*60*60);
-    let months = Math.floor(diff / (30*24*60*60)); diff %= (30*24*60*60);
-    let days = Math.floor(diff / (24*60*60)); diff %= (24*60*60);
-    let hours = Math.floor(diff / (60*60)); diff %= (60*60);
-    let mins = Math.floor(diff / 60);
-    let secs = diff % 60;
-
-    document.getElementById("counter").innerHTML =
-        `❤️ الوقت مع بعضنا ❤️<br>
-        ${years} سنين | ${months} شهور | ${days} أيام<br>
-        ${hours} ساعات | ${mins} دقايق | ${secs} ثواني`;
+function typeWriter(el,text){
+el.innerHTML='';let i=0;
+let intr=setInterval(()=>{
+el.innerHTML+=text[i];i++;
+if(i>=text.length) clearInterval(intr);
+},40);
 }
 
-function celebration(){
-    for(let i=0;i<80;i++){
-        let c = document.createElement("div");
-        c.classList.add("confetti");
-        c.style.left = Math.random()*100 + "vw";
-        c.style.background = `hsl(${Math.random()*360},100%,60%)`;
-        document.body.appendChild(c);
-        setTimeout(()=>c.remove(),3000);
-    }
+function startCounter(){
+let start=new Date('2025-04-08');
+let now=new Date();
+let s=Math.floor((now-start)/1000);
+let y=Math.floor(s/(365*24*3600));s%=365*24*3600;
+let m=Math.floor(s/(30*24*3600));s%=30*24*3600;
+let d=Math.floor(s/(24*3600));s%=24*3600;
+let h=Math.floor(s/3600);s%=3600;
+let min=Math.floor(s/60);
+let sec=s%60;
+counter.innerHTML=`${y}س ${m}ش ${d}ي ${h}س ${min}د ${sec}ث`;
 }
+function speak(text){
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = 'ar-EG';
+    speech.rate = 1;
+    speech.pitch = 1.2;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(speech);
+}
+
 </script>
 
 </body>
